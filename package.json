@@ -1,22 +1,62 @@
 {
-  "name": "electron-quick-start",
+  "name": "gnosis-safe-multisig-desktop",
   "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "description": "A Desktop version of Gnosis Safe Multisig app",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "postinstall": "electron-builder install-app-deps",
+    "build": "electron-builder --mac --windows --linux",
+    "release": "electron-builder --mac --windows --linux --publish always"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/matextrem/safe-electron-multisig",
   "keywords": [
     "Electron",
-    "quick",
-    "start",
-    "tutorial",
-    "demo"
+    "gnosis",
+    "safe",
+    "multisig"
   ],
-  "author": "GitHub",
+  "author": {
+    "name": "Protofire",
+    "email": "matias.dastugue@altoros.com"
+  },
   "license": "CC0-1.0",
+  "build": {
+    "appId": "com.protofire.safeelectron",
+    "productName": "Safe Electron",
+    "asar": true,
+    "dmg": {
+      "contents": [
+        {
+          "x": 110,
+          "y": 150
+        },
+        {
+          "x": 240,
+          "y": 150,
+          "type": "link",
+          "path": "/Applications"
+        }
+      ]
+    },
+    "mac": {
+      "target": "tar.gz"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "deb",
+        "zip"
+      ]
+    },
+    "win": {
+      "target": "NSIS",
+      "icon": "build/icon.ico"
+    }
+  },
+  "dependencies": {},
   "devDependencies": {
-    "electron": "^7.1.10"
+    "electron": "^7.1.10",
+    "electron-builder": "^22.3.2"
   }
 }
