@@ -1,6 +1,5 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow,autoUpdater} = require('electron')
-//const autoUpdater = require("electron-updater");
+const {app, BrowserWindow} = require('electron')
 const path = require('path')
 
 // Keep a global reference of the window object, if you don't, the window will
@@ -40,7 +39,6 @@ function createWindow () {
     // when you should delete the corresponding element.
     mainWindow = null
   })
-  autoUpdater.checkForUpdatesAndNotify();
 }
 
 // This method will be called when Electron has finished
