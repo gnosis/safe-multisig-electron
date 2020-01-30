@@ -9,7 +9,10 @@
     "build": "electron-builder --mac --windows --linux",
     "release": "electron-builder --mac --windows --linux --publish always"
   },
-  "repository": "https://github.com/matextrem/safe-electron-multisig",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/matextrem/safe-electron-multisig.git"
+  },
   "keywords": [
     "Electron",
     "gnosis",
