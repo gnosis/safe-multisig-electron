@@ -43,7 +43,10 @@
       ]
     },
     "mac": {
-      "target": "tar.gz"
+      "target": [
+        "tar.gz",
+        "dmg"
+      ]
     },
     "linux": {
       "target": [
