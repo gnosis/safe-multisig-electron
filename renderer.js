@@ -23,9 +23,17 @@ ipcRenderer.on('message', (event, data) => {
 })
 
 function showMessage(message, hide = true, replaceAll = false) {
+  if(hide){
     mdtoast(message, {
-        interaction: true,
-        duration:10000,
+      duration:10000
+    });
+  }else
+    mdtoast(message, {
+      interaction: true,
+      actionText: 'DISMISS',
+      action: function(){
+        this.hide();
+      }
     });
 }
 

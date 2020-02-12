@@ -7,7 +7,6 @@
     "start": "electron .",
     "postinstall": "electron-builder install-app-deps",
     "build": "electron-builder --mac --windows --linux",
-    "ship": "build --mac --linux --windows -p always",
     "release": "electron-builder --mac --windows --linux --publish always"
   },
   "repository": {
@@ -20,6 +19,7 @@
     "safe",
     "multisig"
   ],
+  "postinstall": "electron-builder install-app-deps",
   "author": {
     "name": "Protofire",
     "email": "matias.dastugue@altoros.com"
@@ -57,7 +57,10 @@
       ]
     },
     "win": {
-      "target": "NSIS",
+      "target": [
+        "NSIS",
+        "squirrel"
+      ],
       "icon": "build/icon.ico"
     }
   },
