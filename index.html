@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="./public/styles.css" />
+    <link rel="stylesheet" href="./public/snackbar/mdtoast.min.css" />
+
+    <title>Gnosis Safe Multisig</title>
+  </head>
+  <body>
+    <!-- All of the Node.js APIs are available in this renderer process. -->
+    <iframe
+      frameborder="0"
+      scrolling="no"
+      id="iframe"
+      src="https://gnosis-safe.io/"
+    ></iframe>
+    <script src="./public/snackbar/mdtoast.min.js"></script>
+    <script>
+      // You can also require other files to run in this process
+      require("./renderer.js");
+    </script>
+  </body>
+</html>

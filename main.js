@@ -1,11 +1,13 @@
 // Modules to control application life and create native browser window
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, ipcMain} = require('electron')
+const url = require('url')
 const path = require('path')
+const autoUpdater = require('./auto-updater')
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
-
+let updaterWindow
 function createWindow () {
   // Create the browser window.
   mainWindow = new BrowserWindow({
@@ -14,7 +16,9 @@ function createWindow () {
     height: 768,
     titleBarStyle: 'hiddenInset',
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js')
+      preload: path.join(__dirname, 'preload.js'),
+      nodeIntegration:true,
+      webSecurity: false
     },
     icon: path.join(__dirname, 'safe.png')
   })
@@ -23,14 +27,22 @@ function createWindow () {
   })
 
   // and load the index.html of the app.
-  mainWindow.loadURL('https://gnosis-safe.io/')
-
+  //mainWindow.loadURL('https://gnosis-safe.io/')
+  mainWindow.loadURL(url.format({
+    pathname: path.join(__dirname, 'index.html'),
+    protocol: 'file:',
+    slashes: true
+  }))
   // Hide the menu
   mainWindow.setMenu(null);
 
 
   // Open the DevTools.
-  // mainWindow.webContents.openDevTools()
+  mainWindow.webContents.openDevTools()
+
+  mainWindow.webContents.on('did-finish-load', () => {
+    autoUpdater.init(mainWindow)
+  })
 
   // Emitted when the window is closed.
   mainWindow.on('closed', function () {
@@ -44,7 +56,7 @@ function createWindow () {
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
-
+app.commandLine.appendSwitch('disable-site-isolation-trials');
 app.on('ready',createWindow);
 
 // Quit when all windows are closed.
