@@ -8,6 +8,7 @@ const electron = require('electron')
 //const snackbar = require('node-snackbar')
 const ipcRenderer = electron.ipcRenderer
 let lastMsgId = 0
+let toastInstance = undefined
 const iFrame = document.getElementById('iframe')
 
 window.quitAndInstall = function () {
@@ -19,22 +20,29 @@ ipcRenderer.on('console', (event, consoleMsg) => {
 })
 
 ipcRenderer.on('message', (event, data) => {
-  showMessage(data.msg, data.hide, data.replaceAll)
+  showMessage(data.msg, data.hide, data.isLinux, data.action, data.linuxUri)
 })
 
-function showMessage(message, hide = true, replaceAll = false) {
+function showMessage(message, hide = true, isLinux = false, action = undefined, linuxUri = '') {
   if(hide){
-    mdtoast(message, {
-      duration:10000
+    toastInstance = mdtoast(message, {
+      duration:5000
     });
   }else
-    mdtoast(message, {
+  toastInstance = mdtoast(message, {
       interaction: true,
-      actionText: 'DISMISS',
+      interactionTimeout: isLinux ? 10000 : null,
+      actionText: action && isLinux ? 'DOWNLOAD' : action ? 'RESTART' : 'DISMISS',
       action: function(){
-        this.hide();
+        action && isLinux ? downloadApp(linuxUri) : action ? window.quitAndInstall() : this.hide();
       }
     });
+}
+
+function downloadApp(url) {
+  electron.shell.openExternal(url)
+  toastInstance.hide()
+  return
 }
 
 function resizeIFrameToFitContent( iFrame ) {
