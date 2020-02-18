@@ -11,6 +11,8 @@ if (os.platform() === 'darwin') {
   updateFeed = `${nutsURL}/update/${platform}/${appVersion}`
 } else if (os.platform() === 'win32') {
   updateFeed = `${nutsURL}/update/win32/${appVersion}`
+} else if(os.platform() === 'linux') {
+  console.log(platform)
 }
 
 function init(mainWindow) {
