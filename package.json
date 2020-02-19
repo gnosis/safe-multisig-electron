@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron .",
     "postinstall": "electron-builder install-app-deps",
-    "build": "electron-builder --windows --mac --linux",
+    "build": "electron-builder --mac --linux",
     "release": "electron-builder --windows --mac --linux --publish always"
   },
   "repository": {
