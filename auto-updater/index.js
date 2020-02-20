@@ -1,14 +1,15 @@
 const os = require('os')
 const fetch = require('node-fetch');
-const {autoUpdater} = require('electron')
+const {autoUpdater,dialog } = require('electron')
 const appVersion = require('../package.json').version
 
 let updateFeed = ''
 let latestVersion = null
 let linuxUri = undefined
 let initialized = false
+const cmd = process.argv[1];
 const platform = `${os.platform()}_${os.arch()}`
-const nutsURL = 'https://safe-electron-multisig.now.sh/'
+const nutsURL = 'https://safe-electron-multisig.now.sh'
 
 if (os.platform() === 'darwin') {
   updateFeed = `${nutsURL}/update/${platform}/${appVersion}`
@@ -40,7 +41,12 @@ function init(mainWindow) {
   autoUpdater.setFeedURL(updateFeed)
 
   autoUpdater.on('error', (ev, err) => {
-    mainWindow.webContents.send('message', { msg: `😱 Error: ${err}`, hide:false })
+    let options  = {
+      message: err
+     }
+    const response = dialog.showMessageBox(options);
+    console.log(response);
+    //mainWindow.webContents.send('message', { msg: `😱 Error: ${err}`, hide:false })
   })
 
   autoUpdater.once('checking-for-update', (ev, err) => {
@@ -59,6 +65,7 @@ function init(mainWindow) {
     mainWindow.webContents.send('message', { msg:'🤘 Update downloaded.', hide: false, isLinux: false, action:true })
   })
 
+if (cmd !== '--squirrel-firstrun') 
   autoUpdater.checkForUpdates()
 }
 
