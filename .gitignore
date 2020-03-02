@@ -2,3 +2,4 @@ node_modules
 dist
 electron-builder.yml
 .now
+.env
