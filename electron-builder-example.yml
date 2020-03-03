@@ -1,0 +1,4 @@
+appId: com.protofire.safeelectron
+publish:
+  provider: github
+  token: <your-github-token>
