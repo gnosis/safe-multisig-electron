@@ -27,6 +27,7 @@
   "license": "CC0-1.0",
   "build": {
     "appId": "io.gnosis.safe.macos",
+    "afterSign": "scripts/notarize.js",
     "productName": "Safe Electron",
     "asar": true,
     "publish": [
