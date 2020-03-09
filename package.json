@@ -7,11 +7,11 @@
     "start": "electron .",
     "postinstall": "electron-builder install-app-deps",
     "build": "electron-builder --mac --windows --linux",
-    "release": "electron-builder  --mac --windows --linux  --publish always"
+    "release": "electron-builder --mac --windows --linux  --publish always"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/matextrem/safe-electron-multisig.git"
+    "url": "https://github.com/gnosis/safe-multisig-electron.git"
   },
   "keywords": [
     "Electron",
@@ -33,8 +33,8 @@
     "publish": [
       {
         "provider": "github",
-        "owner": "matextrem",
-        "repo": "safe-electron-multisig"
+        "owner": "gnosis",
+        "repo": "safe-multisig-electron"
       }
     ],
     "dmg": {
