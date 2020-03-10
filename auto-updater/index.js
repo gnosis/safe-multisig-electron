@@ -1,6 +1,16 @@
 const os = require('os');
 const fetch = require('node-fetch');
-const { autoUpdater, dialog, app } = require('electron');
+const { dialog, app } = require('electron');
+const log = require('electron-log');
+const { autoUpdater } = require("electron-updater");
+
+// This logging setup is not required for auto-updates to work,
+// but it sure makes debugging easier :)
+//-------------------------------------------------------------------
+autoUpdater.logger = log;
+autoUpdater.logger.transports.file.level = 'info';
+log.info('App starting...');
+
 const appVersion = app.getVersion();
 
 let updateFeed = '';
@@ -9,6 +19,8 @@ let linuxUri = undefined;
 let initialized = false;
 const cmd = process.argv[1];
 const platform = os.platform();
+
+/*
 
 const nutsURL = 'https://safe-electron-multisig.now.sh';
 
@@ -24,10 +36,12 @@ if (platform === 'darwin') {
       linuxUri = res.files.AppImage.url;
     });
 }
+*/
 
 function init(mainWindow) {
   mainWindow.webContents.send('console', `App version: ${appVersion}`);
 
+  /*
   if (latestVersion && appVersion < latestVersion) {
     mainWindow.webContents.send('message', {
       msg: `🎉 There is an update available!`,
@@ -38,19 +52,20 @@ function init(mainWindow) {
     });
     return;
   }
+  */
 
   mainWindow.webContents.send('message', {
     msg: `🖥 App version: ${appVersion}`,
     hide: true,
   });
 
-  if (initialized || !updateFeed || process.env.NODE_ENV === 'development') {
+  if (initialized || process.env.NODE_ENV === 'development') {
     return;
   }
 
   initialized = true;
 
-  autoUpdater.setFeedURL(updateFeed);
+  //autoUpdater.setFeedURL(updateFeed);
 
   autoUpdater.on('error', (ev, err) => {
     let options = {

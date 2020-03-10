@@ -4,9 +4,9 @@
   "description": "A Desktop version of Gnosis Safe Multisig app",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "NODE_ENV=development electron .",
     "postinstall": "electron-builder install-app-deps",
-    "build": "electron-builder --mac --windows --linux",
+    "build": "electron-builder --windows --linux",
     "release": "electron-builder --mac --windows --linux  --publish always"
   },
   "repository": {
@@ -86,13 +86,15 @@
         "github"
       ],
       "target": [
-        "squirrel"
+        "squirrel",
+        "nsis"
       ],
       "icon": "build/icon.ico"
     }
   },
   "dependencies": {
     "dotenv": "^8.2.0",
+    "electron-log": "^4.0.7",
     "electron-squirrel-startup": "^1.0.0",
     "electron-updater": "^4.2.0",
     "node-fetch": "^2.6.0",
