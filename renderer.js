@@ -5,7 +5,6 @@
 // selectively enable features needed in the rendering
 // process.
 const electron = require('electron');
-//const snackbar = require('node-snackbar')
 const ipcRenderer = electron.ipcRenderer;
 let toastInstance = undefined;
 const iFrame = document.getElementById('iframe');

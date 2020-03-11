@@ -6,7 +6,7 @@
   "scripts": {
     "start": "NODE_ENV=development electron .",
     "postinstall": "electron-builder install-app-deps",
-    "build": "electron-builder --windows --linux",
+    "build": "electron-builder --mac --windows --linux",
     "release": "electron-builder --mac --windows --linux  --publish always"
   },
   "repository": {
@@ -86,7 +86,6 @@
         "github"
       ],
       "target": [
-        "squirrel",
         "nsis"
       ],
       "icon": "build/icon.ico"

@@ -13,46 +13,12 @@ log.info('App starting...');
 
 const appVersion = app.getVersion();
 
-let updateFeed = '';
-let latestVersion = null;
-let linuxUri = undefined;
 let initialized = false;
 const cmd = process.argv[1];
 const platform = os.platform();
 
-/*
-
-const nutsURL = 'https://safe-electron-multisig.now.sh';
-
-if (platform === 'darwin') {
-  updateFeed = `${nutsURL}/update/${platform}/${appVersion}`;
-} else if (os.platform() === 'win32') {
-  updateFeed = `${nutsURL}/update/win32/${appVersion}`;
-} else if (os.platform() === 'linux') {
-  fetch(`${nutsURL}/latest-version`)
-    .then(res => res.json())
-    .then(res => {
-      latestVersion = res.version.substring(1);
-      linuxUri = res.files.AppImage.url;
-    });
-}
-*/
-
 function init(mainWindow) {
   mainWindow.webContents.send('console', `App version: ${appVersion}`);
-
-  /*
-  if (latestVersion && appVersion < latestVersion) {
-    mainWindow.webContents.send('message', {
-      msg: `🎉 There is an update available!`,
-      hide: false,
-      isLinux: true,
-      action: true,
-      linuxUri,
-    });
-    return;
-  }
-  */
 
   mainWindow.webContents.send('message', {
     msg: `🖥 App version: ${appVersion}`,
@@ -65,15 +31,12 @@ function init(mainWindow) {
 
   initialized = true;
 
-  //autoUpdater.setFeedURL(updateFeed);
-
   autoUpdater.on('error', (ev, err) => {
     let options = {
       message: err,
     };
     const response = dialog.showMessageBox(options);
     console.log(response);
-    //mainWindow.webContents.send('message', { msg: `😱 Error: ${err}`, hide:false })
   });
 
   autoUpdater.once('checking-for-update', (ev, err) => {
