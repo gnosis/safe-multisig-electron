@@ -6,7 +6,7 @@ To clone and run this repository you'll need [Git](https://git-scm.com) and [Nod
 
 ```bash
 # Clone this repository
-git clone https://github.com/matextrem/safe-electron-multisig
+git clone https://github.com/gnosis/safe-multisig-electron
 # Go into the repository
 cd safe-electron-multisig
 # Install dependencies
