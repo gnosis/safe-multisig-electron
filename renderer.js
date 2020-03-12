@@ -18,15 +18,13 @@ ipcRenderer.on('console', (event, consoleMsg) => {
 });
 
 ipcRenderer.on('message', (event, data) => {
-  showMessage(data.msg, data.hide, data.isLinux, data.action, data.linuxUri);
+  showMessage(data.msg, data.hide, data.action);
 });
 
 function showMessage(
   message,
   hide = true,
-  isLinux = false,
   action = undefined,
-  linuxUri = '',
 ) {
   if (hide) {
     toastInstance = mdtoast(message, {
@@ -35,13 +33,11 @@ function showMessage(
   } else
     toastInstance = mdtoast(message, {
       interaction: true,
-      interactionTimeout: isLinux ? 10000 : null,
+      interactionTimeout: null,
       actionText:
-        action && isLinux ? 'DOWNLOAD' : action ? 'RESTART' : 'DISMISS',
+        action ? 'RESTART' : 'DISMISS',
       action: function() {
-        action && isLinux
-          ? downloadApp(linuxUri)
-          : action
+        action
           ? window.quitAndInstall()
           : this.hide();
       },

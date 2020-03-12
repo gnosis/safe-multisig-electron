@@ -64,7 +64,6 @@ function init(mainWindow) {
     mainWindow.webContents.send('message', {
       msg: '🤘 Update downloaded.',
       hide: false,
-      isLinux: false,
       action: true,
     });
   });
