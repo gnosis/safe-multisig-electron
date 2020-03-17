@@ -2,6 +2,7 @@
 const { app, BrowserWindow, ipcMain } = require('electron');
 if(require('electron-squirrel-startup')) return;
 const url = require('url');
+const open = require('open');
 const path = require('path');
 const autoUpdater = require('./auto-updater');
 
@@ -18,7 +19,7 @@ function createWindow() {
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
       nodeIntegration: true,
-      webSecurity: false,
+      webSecurity:false
     },
     icon: path.join(__dirname, 'safe.png'),
   });
@@ -35,11 +36,17 @@ function createWindow() {
       slashes: true,
     }),
   );
+
   // Hide the menu
   mainWindow.setMenu(null);
 
   // Open the DevTools.
   //mainWindow.webContents.openDevTools()
+
+  mainWindow.webContents.on('new-window', function(event, url){
+    event.preventDefault();
+    open(url);
+  });
 
   mainWindow.webContents.on('did-finish-load', () => {
     autoUpdater.init(mainWindow);

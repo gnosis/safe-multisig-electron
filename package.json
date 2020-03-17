@@ -97,7 +97,8 @@
     "electron-squirrel-startup": "^1.0.0",
     "electron-updater": "^4.2.0",
     "node-fetch": "^2.6.0",
-    "node-snackbar": "0.1.16"
+    "node-snackbar": "0.1.16",
+    "open": "^7.0.3"
   },
   "devDependencies": {
     "electron": "^7.1.10",
