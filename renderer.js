@@ -11,6 +11,8 @@ const iFrame = document.getElementById('iframe');
 
 // add the transport to the iframe window global object
 iFrame.contentWindow.TransportNodeHid = window.TransportNodeHid;
+iFrame.contentWindow.isDesktop = window.isDesktop;
+
 
 window.quitAndInstall = function() {
   electron.remote.autoUpdater.quitAndInstall();
