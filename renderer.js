@@ -9,6 +9,9 @@ const ipcRenderer = electron.ipcRenderer;
 let toastInstance = undefined;
 const iFrame = document.getElementById('iframe');
 
+// add the transport to the iframe window global object
+iFrame.contentWindow.TransportNodeHid = window.TransportNodeHid;
+
 window.quitAndInstall = function() {
   electron.remote.autoUpdater.quitAndInstall();
 };

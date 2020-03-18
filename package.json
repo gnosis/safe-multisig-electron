@@ -92,6 +92,7 @@
     }
   },
   "dependencies": {
+    "@ledgerhq/hw-transport-node-hid": "^5.11.0",
     "dotenv": "^8.2.0",
     "electron-log": "^4.0.7",
     "electron-squirrel-startup": "^1.0.0",
