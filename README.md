@@ -8,7 +8,7 @@ To clone and run this repository you'll need [Git](https://git-scm.com) and [Nod
 # Clone this repository
 git clone https://github.com/gnosis/safe-multisig-electron
 # Go into the repository
-cd safe-electron-multisig
+cd safe-multisig-electron
 # Install dependencies
 npm install
 # Run the app
